@@ -32,7 +32,14 @@ const App = () => {
         - gönderinin idsi "gonderiID" ile eşleşirse, istenen değerlerle yeni bir gönderi nesnesi döndürün.
         - aksi takdirde, sadece gönderi nesnesini değiştirmeden döndürün.
      */
-
+    const yeniGönderi= gonderiler.map((gonderi)=>{
+      if(gonderiID === gonderi.id){
+        return {...gonderi,likes:gonderi.likes+1}
+      }else{
+        return gonderi
+      }
+    })
+    setGonderiler(yeniGönderi)
   };
 
   return (
@@ -41,7 +48,8 @@ const App = () => {
       {/* Yukarıdaki metni projeye başladığınızda silin*/}
       {/* AramaÇubuğu ve Gönderiler'i render etmesi için buraya ekleyin */}
       <AramaCubugu />
-      <Gonderiler gonderiler={gonderiler}/>
+      <Gonderiler gonderiler={gonderiler}
+       gonderiyiBegen={gonderiyiBegen}/>
       {/* Her bileşenin hangi proplara ihtiyaç duyduğunu kontrol edin, eğer ihtiyaç varsa ekleyin! */}
     </div>
   );
