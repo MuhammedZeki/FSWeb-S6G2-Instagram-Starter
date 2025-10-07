@@ -20,6 +20,22 @@ const App = () => {
   // Artık sahteVeri'ye ihtiyacınız olmayacak.
   // Arama çubuğunun çalışması için , arama kriterini tutacak başka bir state'e ihtiyacımız olacak.
   const [aramaKriteri,setAramaCubugu]=useState("")
+  const arama =(input)=>{
+      setAramaCubugu(input)
+      if (input === '') {
+        setGonderiler(sahteVeri);
+        return;
+      }
+      const yeniPost= gonderiler.filter((gonderi)=>{
+        if(gonderi.username.includes(input)){
+          return gonderi
+        }else{
+          return false
+        }
+      })
+      setGonderiler(yeniPost)
+
+  }
   const gonderiyiBegen = (gonderiID) => {
     /*
       Bu fonksiyon, belirli bir id ile gönderinin beğeni sayısını bir artırma amacına hizmet eder.
@@ -47,7 +63,7 @@ const App = () => {
       App Çalışıyor
       {/* Yukarıdaki metni projeye başladığınızda silin*/}
       {/* AramaÇubuğu ve Gönderiler'i render etmesi için buraya ekleyin */}
-      <AramaCubugu />
+      <AramaCubugu aramaKriteri={aramaKriteri} arama={arama}/>
       <Gonderiler gonderiler={gonderiler}
        gonderiyiBegen={gonderiyiBegen}/>
       {/* Her bileşenin hangi proplara ihtiyaç duyduğunu kontrol edin, eğer ihtiyaç varsa ekleyin! */}
